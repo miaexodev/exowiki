@@ -1,0 +1,260 @@
+ExMD v0.0.0-0.1
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!  ExoDev Blog Post 20210713-195500.exmd
+#!
+#!  Copyright © 2021  Mia B. Regula, All Rights Reserved
+#!
+#!  This work is licensed under the Creative Commons Attribution 4.0
+#!  International License. To view a copy of this license, visit
+#!  http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative
+#!  Commons, PO Box 1866, Mountain View, CA 94042, USA.
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------------------------------------------------------------------------
+Copyright:  Copyright © 2021  Mia B. Regula, All Rights Reserved
+--------------------------------------------------------------------------------
+
+
+#> ExoDev Blog Post 20210713-195500
+
+################################################################################
+#                                   ExoWiki
+#
+#                                  v0.0.0-0.0
+################################################################################
+
+
+# Introduction
+
+This follow-along blog follows me as I create ExoWiki, a stand-alone server
+application in C#. In fact, it is the software I will be using to create this
+blog and other wiki pages related to the ExoWiki project.
+
+So, if you didn't catch it, there's a problem with that last statement. How can
+I use ExoWiki to create this blog before it has been created? There's actually
+no mystery. I am writing this post using Visual Studio as a text editor. This is
+one of ExoWiki's features. Its pages are stored as plain text files. One of the
+planned usages for ExoWiki is to be able to commit the source for software
+projects together with updated blog and wiki pages and have them automatically
+published to relevant parts of a central wiki. To accomplish this, ExoWiki is
+being made as a stand-alone server that can be run locally to edit the source
+files in a software project or as the central server to publish to. But, we need
+to walk before we run. For now, the focus will be on just executing the software
+locally to edit the source files.
+
+
+# Getting Started
+
+Because I'm blogging about the creation of ExoWiki as I create it, my first step
+was to create a folder for ExoWiki that I named "exowiki" (I decided to use all
+lowercase letters to be more Unix friendly but that wasn't strictly necessary).
+Inside the exowiki folder, I created another folder named wikipages. Inside that
+I created a folder named exowiki and then inside that I created a folder named
+blog. Inside the blog folder, I then created a file named
+"20210713-195500.exmd". That is the file where I am writing this blog post using
+Visual Studio as my text editor. I won't be dicussing the specifics of this
+file because this is a blog about creating exowiki, not about creating a blog
+about exowiki. Later on in this series I will discuss the exmd format. For now
+all you need to know is that it is the file format that ExoWiki will be using
+for its pages. ExMD stands for ExoMarkDown. The file will be committed along
+with this iteration of the source (that was the purpose to creating ExoWiki), so
+you can view it in the source if you're curious. If you want to create a similar
+file to document your own work, you'll want to use a header something like this:
+
+#> Sample ExMD file header
+```exmd
+ExMD v0.0.0-0.1
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!  Filename.exmd
+#!
+#!  Copyright © <Year>  Your Name, All Rights Reserved
+#!
+#!  License
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+--------------------------------------------------------------------------------
+Copyright:  Copyright © <Year>  Your Name, All Rights Reserved
+--------------------------------------------------------------------------------
+
+
+#> Pretitle (this will appear in smaller text as part of the title)
+
+################################################################################
+#                                    Title
+#
+#                                   Subtitle
+################################################################################
+
+
+# Introduction
+
+Introduce the project here.
+```
+
+Notice that the filename I used was in the format "YYYYMMDD-HHMMSS" where YYYY
+is the 4 digit year, MM is the 2 digit month, DD is the 2 digit day, HH is the
+2 digit hour in 24 hour time (0-23), MM is the 2 digit minute, and SS is the 2
+digit second. You must use the same format if you are creating your own file.
+The date will be used to sort blog posts.
+
+Okay, so now I have a place to write. What's next?
+
+
+# Creating the Repository
+
+So there are a few things that should be true of any signficant software project
+(anything beyond a toy, one off, or very simple utility):
+
+*   It should be documented
+*   It should include automatic tests
+*   It should be placed under source control
+*   It should be backed up regularly
+
+To accomplish those last two tasks, I'll be using GitHub. By regularly
+committing my source to GitHub, I can then depend on them to provide the
+backups. So, the first thing I'm going to do for ExoWiki is create a repository
+on GitHub.
+
+This blog isn't about how to create GitHub repositories, so I'll leave that to
+the reader. There are plenty of articles out there about using GitHub or another
+source control repository. I do recommend sticking with git if you are following
+along because I will be using git commands at various places.
+
+The one thing to know is that I created the repository on GitHub, but I didn't
+initialize it. At the time of this writing, if you tell GitHub to add a ReadMe
+file, a .gitignore file, or a license file, it will not only create the
+repository, it will also initialize it. I didn't want to initialize it because I
+plan on creating all three of those files and because I want to include this
+blog post in the initial commit.
+
+
+# Files for the Initial Commit
+
+For the initial commit, I'm only including the blog post that I'm writing now,
+the README.md file, and the LICENSE.txt file. I created README.md and
+LICENSE.md file in the root project folder (the "exowiki" folder). The contents
+of the README.md file are as follows:
+
+#> README.md
+```md
+# ExoWiki ReadMe
+
+--------------------------------------------------------------------------------
+ExoWiki
+
+Copyright © 2021  Mia B. Regula, All Rights Reserved
+
+This work is licensed under the MIT license. See [LICENSE.md](LICENSE.md) for
+details.
+
+--------------------------------------------------------------------------------
+<br/>
+
+
+## Introduction
+
+ExoWiki is a stand-alone wiki server written in C#.
+```
+
+and the contents of LICENSE.md are:
+
+#> LICENSE.md
+```
+# ExoWiki License
+
+--------------------------------------------------------------------------------
+ExoWiki
+
+Copyright © 2021  Mia B. Regula, All Rights Reserved
+
+This work is licensed under the MIT license.
+
+--------------------------------------------------------------------------------
+<br/>
+
+
+## The MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+With these basic texts out of the way, I only have one last detail to attend to.
+Because I used Visual Studio and Visual Studio Code to create these documents (I
+used Visual Studio Code at one point because I have a markdown preview extension
+installed in it), I now have a .vs folder in my project root directory. In fact,
+I'm going to have another .vs folder later for C# project. Neither should be
+included in source control, so I also created a .gitignore file in the project
+root directoy (the "exosol" folder) with the following content:
+
+#> .gitignore
+```
+.vs
+```
+
+In your .gitignore file, you'll also want to include ".vs". As I mentioned, this
+will be needed when I create the Visual Studio project. You may also need to
+ignore other files if you used any other editors.
+
+And that's it. I'm ready for the initial commit.
+
+
+## Making the Initial Commit
+
+As soon as I finish writing this article, I'll be issuing the following commands
+from within a git bash shell:
+
+```
+git init
+git config user.name "Mia R (exodev)"
+git config user.email "miaexodev@gmail.com"
+git add --all
+git commit -m "Initialized repository"
+git branch -M main
+git remote add origin https://github.com/miaexodev/exowiki.git
+git push -u origin main
+git tag -a v0.0.0-0.0 -m "Version 0.0.0-0.0"
+git push origin v0.0.0-0.0
+```
+
+These commands have to be executed in the root project directory (the "exowiki"
+folder). "https://github.com/miaexodev/exowiki.git" is the URL of my repository.
+You'll need to substitute the URL of your own repository there.
+
+Once I do that, you'll be able to see the source at
+https://github.com/miaexodev/exowiki.
+
+
+## Next Time
+
+Next time I'll create the Visual Studio project and serve a blank Web page. Hey,
+you gotta walk before you run. See you there.
+
+
+## Afterthought
+
+Oh, by the way, I forgot to mention something about all of these files. When
+creating them, I saved them as UTF-8. When creating your own files, if you don't
+see the copyright symbol after the word Copyright, it's probably because you
+saved the file in some other format (if you're on Windows, you probably saved
+the file using the Windows-1252 codepage). This is the legacy of an era that is
+slowly passing away (thankfully). I may discuss some of these other encodings if
+I decide to support a more recent version of Unicode than .NET uses, but I don't
+think there's enough value added by doing that for this application to justify
+the cost of doing it.
